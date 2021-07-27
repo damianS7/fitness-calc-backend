@@ -11,23 +11,37 @@ public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    // Busca todos los ingredientes que existen
     public List<Ingredient> getIngredients() {
         return ingredientRepository.findAll();
     }
 
+    // Nuevo ingrediente
     public Ingredient storeIngredient(Ingredient ingredient) {
         return ingredientRepository.save(ingredient);
     }
 
-    public Ingredient updateIngredient(Ingredient ingredient) {
-//        Ingredient i = ingredientRepository.findById(ingredient.getId());
-//        ingredientRepository.flush();
+    // Modifica un ingrediente
+    public Ingredient updateIngredient(Long id, Ingredient ingredient) {
+        Optional<Ingredient> ingredientDb = ingredientRepository.findById(id);
+
+        // Si no se encuentra lanza NoSuchElementException
+        ingredientDb.orElseThrow();
+
         return ingredientRepository.save(ingredient);
     }
 
-    public Ingredient deleteIngredient(Long ingredientId) {
-        Optional<Ingredient> ingredient = ingredientRepository.findById(ingredientId);
-        ingredientRepository.deleteById(ingredientId);
-        return ingredient.orElse(null);
+    // Elimina un ingrediente
+    public Ingredient deleteIngredient(Long id) {
+        Optional<Ingredient> ingredient = ingredientRepository.findById(id);
+
+        // Si no se encuentra lanza NoSuchElementException
+        ingredient.orElseThrow();
+
+        // Borra el ingrediente
+        ingredientRepository.deleteById(id);
+
+        // Retorna el ingrediente borrado
+        return ingredient.get();
     }
 }

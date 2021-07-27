@@ -13,9 +13,9 @@ public class IngredientController {
 
     /**
      * Devuelve todos los ingredientes
-     * @return
+     * @return List<Ingredient>
      */
-    @GetMapping("/api/user/ingredients")
+    @GetMapping("/api/v1/ingredients")
     public List<Ingredient> getIngredients () {
         return ingredientService.getIngredients();
     }
@@ -25,29 +25,29 @@ public class IngredientController {
      * @param ingredient
      * @return
      */
-    @PostMapping("/api/user/ingredients")
+    @PostMapping("/api/v1/ingredients")
     public Ingredient storeIngredient (@RequestBody Ingredient ingredient) {
         return ingredientService.storeIngredient(ingredient);
     }
 
     /**
      * Modifica un ingrediente
-     * @param ingredientId
+     * @param id
      * @return Ingredient
      */
-    @PutMapping("/api/user/ingredients/{ingredientId}")
-    public Ingredient updateIngredient (@PathVariable Long ingredientId,
+    @PutMapping("/api/v1/ingredients/{id}")
+    public Ingredient updateIngredient (@PathVariable Long id,
                                         @RequestBody Ingredient ingredient) {
-        return ingredientService.updateIngredient(ingredient);
+        return ingredientService.updateIngredient(id, ingredient);
     }
 
     /**
      * Borra un ingrediente
-     * @param ingredientId
+     * @param id
      * @return Ingredient
      */
-    @DeleteMapping("/api/user/ingredients/{ingredientId}")
-    public Ingredient deleteIngredient (@PathVariable Long ingredientId) {
-        return ingredientService.deleteIngredient(ingredientId);
+    @DeleteMapping("/api/v1/ingredients/{id}")
+    public Ingredient deleteIngredient (@PathVariable Long id) {
+        return ingredientService.deleteIngredient(id);
     }
 }
