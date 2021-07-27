@@ -35,7 +35,7 @@ public class IngredientController {
      * @param ingredientId
      * @return Ingredient
      */
-    @PutMapping("/api/user/ingredient/{ingredientId}")
+    @PutMapping("/api/user/ingredients/{ingredientId}")
     public Ingredient updateIngredient (@PathVariable Long ingredientId,
                                         @RequestBody Ingredient ingredient) {
         return ingredientService.updateIngredient(ingredient);
