@@ -79,6 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.applyPermitDefaultValues();
         configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         //configuration.setAllowedMethods(Arrays.asList("GET", "OPTIONS", "POST"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
