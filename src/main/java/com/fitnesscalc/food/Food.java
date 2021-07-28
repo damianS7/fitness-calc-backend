@@ -1,10 +1,18 @@
 package com.fitnesscalc.food;
 
 
+import com.vladmihalcea.hibernate.type.array.IntArrayType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="foods")
+@TypeDefs({
+    @TypeDef(name = "int-array", typeClass = IntArrayType.class)
+})
 public class Food {
     @Id
     @Column
@@ -14,12 +22,16 @@ public class Food {
     @Column
     private String name;
 
-    @Column
-    private String ingredients;
+    @Type(type = "int-array")
+    @Column(
+        name = "ingredients",
+        columnDefinition = "integer[]"
+    )
+    private int[] ingredients;
 
     public Food() {}
 
-    public Food(Long id, String name, String ingredients) {
+    public Food(Long id, String name, int[] ingredients) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
@@ -33,7 +45,7 @@ public class Food {
         return name;
     }
 
-    public String getIngredients() {
+    public int[] getIngredients() {
         return ingredients;
     }
 }
