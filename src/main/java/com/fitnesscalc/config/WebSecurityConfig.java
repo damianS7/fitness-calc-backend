@@ -78,7 +78,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.applyPermitDefaultValues();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost"));
+        // Permitir todos los origenes, solo para testing, al desplear la app
+        // Se debera solo permitir la IP del servidor.
+        configuration.addAllowedOriginPattern("*");
+//        configuration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         //configuration.setAllowedMethods(Arrays.asList("GET", "OPTIONS", "POST"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
