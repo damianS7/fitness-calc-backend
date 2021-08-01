@@ -1,12 +1,9 @@
 package com.fitnesscalc.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/users")
 public class UserController {
 
     private final UserService userService;
@@ -17,8 +14,8 @@ public class UserController {
     }
 
     // Endpoint para actualizar los datos de usuario
-    @PostMapping("/profile")
-    public User update(@RequestBody UserUpdateRequest request) {
+    @PutMapping("/api/v1/users")
+    public UserUpdateResponse update(@RequestBody UserUpdateRequest request) {
         return userService.update(request);
     }
 
