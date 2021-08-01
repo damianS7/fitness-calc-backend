@@ -1,11 +1,8 @@
 package com.fitnesscalc.profile;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fitnesscalc.meals.Meal;
+
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class ProfileResponse {

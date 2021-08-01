@@ -47,15 +47,31 @@ public class Goal {
         return carbohydrates;
     }
 
+    public void setCarbohydrates(int carbohydrates) {
+        this.carbohydrates = carbohydrates;
+    }
+
     public int getProteins() {
         return proteins;
+    }
+
+    public void setProteins(int proteins) {
+        this.proteins = proteins;
     }
 
     public int getFats() {
         return fats;
     }
 
+    public void setFats(int fats) {
+        this.fats = fats;
+    }
+
     public int getKcal() {
         return kcal;
+    }
+
+    public void setKcal(int kcal) {
+        this.kcal = kcal;
     }
 }

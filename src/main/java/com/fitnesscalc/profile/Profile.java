@@ -45,6 +45,14 @@ public class Profile {
         return weights;
     }*/
 
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public Long getId() {
         return id;
     }

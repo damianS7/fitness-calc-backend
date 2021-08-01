@@ -1,8 +1,16 @@
 package com.fitnesscalc.profile;
 
 import com.fitnesscalc.ingredients.Ingredient;
+import com.fitnesscalc.user.User;
+import com.fitnesscalc.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -10,6 +18,9 @@ public class ProfileController {
 
     @Autowired
     private ProfileService profileService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/api/v1/users/profile")
     public ProfileResponse index () {
@@ -21,14 +32,14 @@ public class ProfileController {
         return profileService.storeWeight(weight);
     }
 
-    /**
-     * Borra un peso
-     * @param date del Peso a borrar
-     * @return Weight El peso borrado
-     */
-    @DeleteMapping("/api/v1/users/profile/weight/{id}")
-    public Weight deleteWeight (@PathVariable String date) {
-        return profileService.deleteWeight(date);
+    @PutMapping("/api/v1/users/profile")
+    public Profile updateProfile (@RequestBody Profile profile) {
+        return profileService.updateProfile(profile);
+    }
+
+    @PutMapping("/api/v1/users/goals")
+    public Goal updateGoal (@RequestBody Goal goal) {
+        return profileService.updateGoal(goal);
     }
 
 }

@@ -1,9 +1,6 @@
 package com.fitnesscalc.profile;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +10,7 @@ import java.util.Date;
 public class Weight {
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -35,12 +33,32 @@ public class Weight {
         this.weight = weight;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public Long getProfileId() {
+        return profileId;
+    }
+
+    public void setProfileId(Long profileId) {
+        this.profileId = profileId;
+    }
+
     public String getDate() {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return formatter.format(date);
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public float getWeight() {
         return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
 }
