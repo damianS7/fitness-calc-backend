@@ -1,4 +1,4 @@
-package com.fitnesscalc.profile;
+package com.fitnesscalc.meals;
 
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import org.hibernate.annotations.Type;
@@ -24,7 +24,7 @@ public class Meal {
     private Long id;
 
     @Column
-    private Long profileId;
+    private Long userId;
 
     @Column
     private Date date;
@@ -69,10 +69,10 @@ public class Meal {
 
     }
 
-    public Meal(Long id, Long profile_id, Date date, int[] meal1,
+    public Meal(Long id, Long user_id, Date date, int[] meal1,
                 int[] meal2, int[] meal3, int[] meal4 , int[] meal5) {
         this.id = id;
-        this.profileId = profile_id;
+        this.userId = user_id;
         this.date = date;
         this.meal1 = meal1;
         this.meal2 = meal2;
@@ -81,24 +81,48 @@ public class Meal {
         this.meal5 = meal5;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public int[] getMeal1() {
         return meal1;
+    }
+
+    public void setMeal1(int[] meal1) {
+        this.meal1 = meal1;
     }
 
     public int[] getMeal2() {
         return meal2;
     }
 
+    public void setMeal2(int[] meal2) {
+        this.meal2 = meal2;
+    }
+
     public int[] getMeal3() {
         return meal3;
+    }
+
+    public void setMeal3(int[] meal3) {
+        this.meal3 = meal3;
     }
 
     public int[] getMeal4() {
         return meal4;
     }
 
+    public void setMeal4(int[] meal4) {
+        this.meal4 = meal4;
+    }
+
     public int[] getMeal5() {
         return meal5;
+    }
+
+    public void setMeal5(int[] meal5) {
+        this.meal5 = meal5;
     }
 
     public String getDate() {
