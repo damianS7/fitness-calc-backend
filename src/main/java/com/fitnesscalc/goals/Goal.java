@@ -1,4 +1,4 @@
-package com.fitnesscalc.profile;
+package com.fitnesscalc.goals;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ public class Goal {
     private Long id;
 
     @Column
-    private Long profileId;
+    private Long userId;
 
     @Column
     private int kcal;
@@ -34,9 +34,9 @@ public class Goal {
 
     }
 
-    public Goal(Long id, Long profile_id, int kcal, int proteins, int carbohydrates, int fats) {
+    public Goal(Long id, Long user_id, int kcal, int proteins, int carbohydrates, int fats) {
         this.id = id;
-        this.profileId = profile_id;
+        this.userId = user_id;
         this.proteins = proteins;
         this.carbohydrates = carbohydrates;
         this.fats = fats;

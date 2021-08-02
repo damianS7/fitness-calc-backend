@@ -12,7 +12,7 @@ public class SettingController {
     @Autowired
     private SettingService settingService;
 
-    @GetMapping("/api/v1/settings")
+    @GetMapping("/api/v1/user/settings")
     public List<Setting> index () {
         return settingService.getSettings();
     }
@@ -22,7 +22,7 @@ public class SettingController {
      * @param key
      * @return Ingredient
      */
-    @PutMapping("/api/v1/settings/{key}")
+    @PutMapping("/api/v1/user/setting/{key}")
     public Setting updateSetting (@PathVariable String key,
                                         @RequestBody Setting setting) {
         return settingService.updateSetting(key, setting);

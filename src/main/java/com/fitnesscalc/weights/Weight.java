@@ -1,4 +1,4 @@
-package com.fitnesscalc.profile;
+package com.fitnesscalc.weights;
 
 import javax.persistence.*;
 import java.text.DateFormat;
@@ -14,7 +14,7 @@ public class Weight {
     private Long id;
 
     @Column
-    private Long profileId;
+    private Long userId;
 
     @Column
     private Date date;
@@ -26,9 +26,9 @@ public class Weight {
 
     }
 
-    public Weight(Long id, Long profileId, Date date, float weight) {
+    public Weight(Long id, Long userId, Date date, float weight) {
         this.id = id;
-        this.profileId = profileId;
+        this.userId = userId;
         this.date = date;
         this.weight = weight;
     }
@@ -37,12 +37,12 @@ public class Weight {
         return id;
     }
 
-    public Long getProfileId() {
-        return profileId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setProfileId(Long profileId) {
-        this.profileId = profileId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getDate() {
