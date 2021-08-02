@@ -4,12 +4,14 @@ package com.fitnesscalc.user;
 public class UserUpdateRequest {
     private final String username;
     private final String email;
-    private final String password;
+    private final String oldPassword;
+    private final String newPassword;
 
-    public UserUpdateRequest(String username, String email, String password) {
+    public UserUpdateRequest(String username, String email, String oldPassword, String newPassword) {
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.oldPassword = oldPassword;
+        this.newPassword = newPassword;
     }
 
     public String getUsername() {
@@ -20,7 +22,11 @@ public class UserUpdateRequest {
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
     }
 }
