@@ -1,6 +1,7 @@
 package com.fitnesscalc.meals;
 
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
+import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
@@ -12,11 +13,12 @@ import javax.persistence.Table;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "meals")
 @TypeDefs({
-        @TypeDef(name = "int-array", typeClass = IntArrayType.class)
+        @TypeDef(name = "list-array", typeClass = ListArrayType.class)
 })
 public class Meal {
     @Id
@@ -29,48 +31,48 @@ public class Meal {
     @Column
     private Date date;
 
-    @Type(type = "int-array")
+    @Type(type = "list-array")
     @Column(
-            name = "meal1",
-            columnDefinition = "integer[]"
+            name = "meal1", columnDefinition = "integer[]"
     )
-    private int[] meal1;
+    private List<Integer> meal1;
 
-    @Type(type = "int-array")
+    @Type(type = "list-array")
     @Column(
             name = "meal2",
             columnDefinition = "integer[]"
     )
-    private int[] meal2;
+    private List<Integer> meal2;
 
-    @Type(type = "int-array")
+    @Type(type = "list-array")
     @Column(
             name = "meal3",
             columnDefinition = "integer[]"
     )
-    private int[] meal3;
+    private List<Integer> meal3;
 
-    @Type(type = "int-array")
+    @Type(type = "list-array")
     @Column(
             name = "meal4",
             columnDefinition = "integer[]"
     )
-    private int[] meal4;
+    private List<Integer> meal4;
 
 
-    @Type(type = "int-array")
+    @Type(type = "list-array")
     @Column(
             name = "meal5",
             columnDefinition = "integer[]"
     )
-    private int[] meal5;
+    private List<Integer> meal5;
 
     public Meal() {
 
     }
 
-    public Meal(Long id, Long user_id, Date date, int[] meal1,
-                int[] meal2, int[] meal3, int[] meal4 , int[] meal5) {
+    public Meal(Long id, Long user_id, Date date, List<Integer> meal1,
+                List<Integer> meal2, List<Integer> meal3,
+                List<Integer> meal4, List<Integer> meal5) {
         this.id = id;
         this.userId = user_id;
         this.date = date;
@@ -85,43 +87,43 @@ public class Meal {
         return id;
     }
 
-    public int[] getMeal1() {
+    public List<Integer> getMeal1() {
         return meal1;
     }
 
-    public void setMeal1(int[] meal1) {
+    public void setMeal1(List<Integer> meal1) {
         this.meal1 = meal1;
     }
 
-    public int[] getMeal2() {
+    public List<Integer> getMeal2() {
         return meal2;
     }
 
-    public void setMeal2(int[] meal2) {
+    public void setMeal2(List<Integer> meal2) {
         this.meal2 = meal2;
     }
 
-    public int[] getMeal3() {
+    public List<Integer> getMeal3() {
         return meal3;
     }
 
-    public void setMeal3(int[] meal3) {
+    public void setMeal3(List<Integer> meal3) {
         this.meal3 = meal3;
     }
 
-    public int[] getMeal4() {
+    public List<Integer> getMeal4() {
         return meal4;
     }
 
-    public void setMeal4(int[] meal4) {
+    public void setMeal4(List<Integer> meal4) {
         this.meal4 = meal4;
     }
 
-    public int[] getMeal5() {
+    public List<Integer> getMeal5() {
         return meal5;
     }
 
-    public void setMeal5(int[] meal5) {
+    public void setMeal5(List<Integer> meal5) {
         this.meal5 = meal5;
     }
 
@@ -129,6 +131,10 @@ public class Meal {
 //        DateFormat formatter = new SimpleDateFormat("yyyy-m-dd");
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return formatter.format(date);
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 
