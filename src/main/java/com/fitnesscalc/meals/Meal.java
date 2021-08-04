@@ -5,12 +5,11 @@ import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -22,13 +21,14 @@ import java.util.List;
 })
 public class Meal {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
     private Long userId;
 
     @Column
+    @DateTimeFormat(pattern="yyyy.MM.dd")
     private Date date;
 
     @Type(type = "list-array")
@@ -128,14 +128,19 @@ public class Meal {
     }
 
     public String getDate() {
-//        DateFormat formatter = new SimpleDateFormat("yyyy-m-dd");
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        return formatter.format(date);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(this.date);
     }
 
     public void setDate(Date date) {
         this.date = date;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

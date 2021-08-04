@@ -18,13 +18,9 @@ public class MealController {
         return mealService.getMeals();
     }
 
-    @PostMapping("/api/v1/user/meals/food/add")
-    public Meal addFood (@RequestBody UpdateMealRequest request) {
-        return mealService.addFood(request);
+    @PostMapping("/api/v1/user/meal")
+    public Meal updateMeal (@RequestBody MealRequest request) {
+        return mealService.updateMeal(request);
     }
 
-    @PostMapping("/api/v1/user/meals/food/delete")
-    public Meal deleteFood (@RequestBody UpdateMealRequest request) {
-        return mealService.deleteFood(request);
-    }
 }

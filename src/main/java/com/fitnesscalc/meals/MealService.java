@@ -1,5 +1,6 @@
 package com.fitnesscalc.meals;
 
+import com.fitnesscalc.auth.AuthenticationFailedException;
 import com.fitnesscalc.profile.*;
 import com.fitnesscalc.user.User;
 import com.fitnesscalc.user.UserRepository;
@@ -31,39 +32,53 @@ public class MealService {
         return new MealsResponse(meals);
     }
 
-    public Meal addFood(UpdateMealRequest request) {
+    public Meal updateMeal(MealRequest request) {
+        System.out.println(request.getDate());
+        System.out.println(request.getMeal1());
+        System.out.println(request.getMeal2());
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        // Buscamos el usuario que hace la peticion y lanzamos error si no existe.
         User user = userRepository.findByUsername((username)).orElseThrow();
 
-        Date d = null;
-        try {
-            d = new SimpleDateFormat("yyyy-MM-dd").parse(request.getDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
+        // Si no tiene id la peticion, crearemos una nueva
+        if(request.getId() == null) {
+            Date newDate = null;
+            try {
+                newDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Meal newMeal = new Meal(
+                    null, user.getId(), newDate,
+                    request.getMeal1(), request.getMeal2(), request.getMeal3(),
+                    request.getMeal4(), request.getMeal5()
+            );
+            return mealRepository.save(newMeal);
         }
-        Meal meal = mealRepository.findByDate(d).orElseThrow();
 
-//        if(request.getMeal()) {
-//
-//        }
+        // Si tiene un id lo buscamos
+        Optional<Meal> meal = mealRepository.findById(request.getId());
 
-        meal.getMeal1().add(request.getFoodId());
-
-        return mealRepository.save(meal);
-    }
-
-
-    public Meal deleteFood(UpdateMealRequest request) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findByUsername((username)).orElseThrow();
-        Date d = null;
-        try {
-            d = new SimpleDateFormat("yyyy-MM-dd").parse(request.getDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
+        // Si no existe cramos una nueva comida
+        if(!meal.isPresent()) {
+            throw new AuthenticationFailedException("");
         }
-        Meal meal = mealRepository.findByDate(d).orElseThrow();
-        meal.getMeal1().remove(request.getFoodId());
-        return mealRepository.save(meal);
+
+        // Si lo encontramos, vamos realizamos comprobaciones antes de
+        // de modificar comprobamos que pertenece al usuario
+        if(!meal.get().getUserId().equals(user.getId())) {
+            throw new AuthenticationFailedException("");
+        }
+
+        meal.get().setMeal1(request.getMeal1());
+        meal.get().setMeal2(request.getMeal2());
+        meal.get().setMeal3(request.getMeal3());
+        meal.get().setMeal4(request.getMeal4());
+        meal.get().setMeal5(request.getMeal5());
+
+        // Guardamos los cambios
+        return mealRepository.save(meal.get());
     }
 }

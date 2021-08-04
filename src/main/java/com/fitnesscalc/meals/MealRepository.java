@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface MealRepository extends JpaRepository<Meal, Long>  {
     List<Meal> findByUserId(Long user_id);
     Optional<Meal> findByDate(Date date);
+    // findByUserIdAndDate(Long userId, Date date);
 }
