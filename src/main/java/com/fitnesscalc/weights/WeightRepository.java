@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface WeightRepository extends JpaRepository<Weight, Long>  {
     List<Weight> findByUserId(Long userId);
-    Optional<Weight> findByDate(Date date);
+    Optional<Weight> findByUserIdAndDate(Long id, Date date);
 }

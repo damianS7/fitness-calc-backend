@@ -1,8 +1,9 @@
 package com.fitnesscalc.weights;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -17,6 +18,8 @@ public class Weight {
     private Long userId;
 
     @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
 
     @Column
@@ -45,9 +48,8 @@ public class Weight {
         this.userId = userId;
     }
 
-    public String getDate() {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        return formatter.format(date);
+    public Date getDate() {
+        return date;
     }
 
     public void setDate(Date date) {
