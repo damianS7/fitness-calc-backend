@@ -1,6 +1,5 @@
 package com.fitnesscalc.settings;
 
-import com.fitnesscalc.ingredients.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
