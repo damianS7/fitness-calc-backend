@@ -28,7 +28,7 @@ public class Meal {
     private Long userId;
 
     @Column
-    @DateTimeFormat(pattern="yyyy.MM.dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date date;
 
     @Type(type = "list-array")

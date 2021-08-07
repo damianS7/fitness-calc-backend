@@ -1,11 +1,7 @@
 package com.fitnesscalc.meals;
 
-import com.fitnesscalc.profile.*;
-import com.fitnesscalc.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping
@@ -18,8 +14,8 @@ public class MealController {
         return mealService.getMeals();
     }
 
-    @PostMapping("/api/v1/user/meal")
-    public Meal updateMeal (@RequestBody MealRequest request) {
+    @PutMapping("/api/v1/user/meal")
+    public Meal updateMeal (@RequestBody Meal request) {
         return mealService.updateMeal(request);
     }
 
