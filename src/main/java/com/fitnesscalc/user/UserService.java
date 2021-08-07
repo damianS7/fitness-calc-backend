@@ -47,15 +47,6 @@ public class UserService implements UserDetailsService {
         return new UserUpdateResponse(user.getUsername(), user.getEmail());
     }
 
-    /**
-     * @param id Id del usuario a buscar
-     * @return El usuario buscado o null
-     */
-    public User findUser(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
-    // Este metodo se usa para ...
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username).orElseThrow( () -> {
