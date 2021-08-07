@@ -11,7 +11,7 @@ public class ProfileController {
     private ProfileService profileService;
 
     @GetMapping("/api/v1/user/profile")
-    public ProfileResponse getProfile () {
+    public Profile getProfile () {
         return profileService.getProfile();
     }
 

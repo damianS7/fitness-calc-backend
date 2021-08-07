@@ -1,9 +1,6 @@
 package com.fitnesscalc.profile;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -11,9 +8,9 @@ import java.util.List;
 public class Profile {
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(name = "user_id")
     @Column
     private Long userId;
 
@@ -23,27 +20,16 @@ public class Profile {
     @Column
     private int height;
 
-//    private List<Weight> weights;
-
     public Profile() {
 
     }
 
-    public Profile(Long id, Long user_id, int age, int height) {
+    public Profile(Long id, Long userId, int age, int height) {
         this.id = id;
-        this.userId = user_id;
+        this.userId = userId;
         this.age = age;
         this.height = height;
-//        this.weights = weights;
     }
-
-    /*public void setWeights(List<Weight> weights) {
-        this.weights = weights;
-    }
-
-    public List<Weight> getWeights() {
-        return weights;
-    }*/
 
     public void setHeight(int height) {
         this.height = height;

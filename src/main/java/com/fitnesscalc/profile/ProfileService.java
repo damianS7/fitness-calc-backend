@@ -16,34 +16,42 @@ public class ProfileService {
     @Autowired
     private UserRepository userRepository;
 
-    // Devuelve todas las comidas
-    public ProfileResponse getProfile() {
+    /**
+     * Devuelve todas las comidas del usuario logeado
+     * @return
+     */
+    public Profile getProfile() {
+        // Usuario logeado
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        // Entidad del usuario
         User user = userRepository.findByUsername((username)).orElseThrow();
-        // user id
+
+        // Perfil del usuario
         Profile profile = profileRepository.findByUserId(user.getId()).orElseThrow();
 
-        // Con el profile_id buscamos el resto ...
-
-
-        ProfileResponse response = new ProfileResponse();
-        response.setAge(profile.getAge());
-        response.setHeight(profile.getHeight());
-        return response;
+        return profile;
     }
 
-    public Profile updateProfile(Profile profile) {
+    /**
+     * Actualiza el perfil del usuario
+     * @param requestProfile Datos de perfil enviados por el usuario
+     * @return Devuelve el perfil modificado
+     */
+    public Profile updateProfile(Profile requestProfile) {
+        // Usuario logeado
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        // Entidad del usuario
         User user = userRepository.findByUsername((username)).orElseThrow();
-        Optional<Profile> optionalProfile = profileRepository.findByUserId(user.getId());
 
-        optionalProfile.orElseThrow();
+        // Perfil del usuario
+        Profile profile = profileRepository.findByUserId(user.getId()).orElseThrow();
 
-        Profile storedProfile = optionalProfile.get();
-
-        storedProfile.setAge(profile.getAge());
-        storedProfile.setHeight(profile.getHeight());
-        return profileRepository.save(storedProfile);
+        // Modificamos el perfil y guardamos
+        profile.setAge(requestProfile.getAge());
+        profile.setHeight(requestProfile.getHeight());
+        return profileRepository.save(profile);
     }
 
 }
