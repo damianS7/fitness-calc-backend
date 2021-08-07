@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class IngredientService {
@@ -22,26 +21,29 @@ public class IngredientService {
     }
 
     // Modifica un ingrediente
-    public Ingredient updateIngredient(Long id, Ingredient ingredient) {
-        Optional<Ingredient> ingredientDb = ingredientRepository.findById(id);
-
+    public Ingredient updateIngredient(Long id, Ingredient requestIngredient) {
         // Si no se encuentra lanza NoSuchElementException
-        ingredientDb.orElseThrow();
+        Ingredient ingredient = ingredientRepository.findById(id).orElseThrow();
 
+        // Modificamos el ingrediente
+        ingredient.setName(requestIngredient.getName());
+        ingredient.setProteins(requestIngredient.getProteins());
+        ingredient.setFats(requestIngredient.getFats());
+        ingredient.setCarbohydrates(requestIngredient.getCarbohydrates());
+
+        // Guardamos los cambios
         return ingredientRepository.save(ingredient);
     }
 
     // Elimina un ingrediente
     public Ingredient deleteIngredient(Long id) {
-        Optional<Ingredient> ingredient = ingredientRepository.findById(id);
-
         // Si no se encuentra lanza NoSuchElementException
-        ingredient.orElseThrow();
+        Ingredient ingredient = ingredientRepository.findById(id).orElseThrow();
 
         // Borra el ingrediente
         ingredientRepository.deleteById(id);
 
         // Retorna el ingrediente borrado
-        return ingredient.get();
+        return ingredient;
     }
 }

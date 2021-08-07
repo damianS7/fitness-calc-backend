@@ -41,15 +41,31 @@ public class Ingredient {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getProteins() {
         return proteins;
+    }
+
+    public void setProteins(int proteins) {
+        this.proteins = proteins;
     }
 
     public int getFats() {
         return fats;
     }
 
+    public void setFats(int fats) {
+        this.fats = fats;
+    }
+
     public int getCarbohydrates() {
         return carbohydrates;
+    }
+
+    public void setCarbohydrates(int carbohydrates) {
+        this.carbohydrates = carbohydrates;
     }
 }
