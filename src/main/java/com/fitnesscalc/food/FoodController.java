@@ -23,7 +23,6 @@ public class FoodController {
 
     /**
      * Crea una nueva comida
-     *
      * @param food
      * @return
      */
@@ -34,7 +33,6 @@ public class FoodController {
 
     /**
      * Modifica una comida
-     *
      * @param id
      * @return Food
      */
@@ -46,7 +44,6 @@ public class FoodController {
 
     /**
      * Borra una comida
-     *
      * @param id
      * @return Food
      */

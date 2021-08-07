@@ -45,7 +45,15 @@ public class Food {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int[] getIngredients() {
         return ingredients;
+    }
+
+    public void setIngredients(int[] ingredients) {
+        this.ingredients = ingredients;
     }
 }

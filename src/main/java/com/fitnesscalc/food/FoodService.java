@@ -1,6 +1,5 @@
 package com.fitnesscalc.food;
 
-import com.fitnesscalc.ingredients.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,26 +22,27 @@ public class FoodService {
     }
 
     // Modifica una comida
-    public Food updateFood(Long id, Food food) {
-        Optional<Food> ingredientDb = foodRepository.findById(id);
-
+    public Food updateFood(Long id, Food request) {
         // Si no se encuentra lanza NoSuchElementException
-        ingredientDb.orElseThrow();
+        Food food = foodRepository.findById(id).orElseThrow();
 
+        // Modificamos la comida
+        food.setName(request.getName());
+        food.setIngredients(request.getIngredients());
+
+        // Guardamos los cambios
         return foodRepository.save(food);
     }
 
     // Elimina una comida
     public Food deleteFood(Long id) {
-        Optional<Food> food = foodRepository.findById(id);
-
         // Si no se encuentra lanza NoSuchElementException
-        food.orElseThrow();
+        Food food = foodRepository.findById(id).orElseThrow();
 
         // Borra la comida
         foodRepository.deleteById(id);
 
         // Retorna la comida borrada
-        return food.get();
+        return food;
     }
 }
