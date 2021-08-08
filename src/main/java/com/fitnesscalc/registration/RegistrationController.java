@@ -27,7 +27,7 @@ public class RegistrationController {
      * @param user
      * @return Creado el usuario devuelve null
      */
-    @PostMapping(path = "/api/users/registration", consumes = "application/json")
+    @PostMapping(path = "/api/v1/users/registration", consumes = "application/json")
     public RegistrationResponse create(@RequestBody User user) throws EmailTakenException, UsernameTakenException {
         return registrationService.register(user);
     }

@@ -2,10 +2,7 @@ package com.fitnesscalc.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -19,8 +16,13 @@ public class AuthenticationController {
      * @return Devuelve AuthenticationResponse con los datos de usuario (id, username, email y token)
      * @throws AuthenticationException Excepcion en caso de fallo
      */
-    @PostMapping("/api/users/login")
+    @PostMapping("/api/v1/users/login")
     public AuthenticationResponse login(@RequestBody AuthenticationRequest request) throws AuthenticationException {
         return authenticationService.auth(request);
+    }
+
+    // Validacion de token
+    @GetMapping("/api/v1/users/tokenvalidation")
+    public void tokenValidation() throws AuthenticationException {
     }
 }
