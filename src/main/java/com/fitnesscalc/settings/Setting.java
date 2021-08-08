@@ -1,14 +1,15 @@
 package com.fitnesscalc.settings;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "settings")
 public class Setting {
     @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column
     private String key;
 
@@ -23,10 +24,15 @@ public class Setting {
 
     }
 
-    public Setting(Long userId, String key, String value) {
+    public Setting(Long id, Long userId, String key, String value) {
+        this.id = id;
         this.key = key;
         this.value = value;
         this.userId = userId;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getKey() {
