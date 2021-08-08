@@ -1,25 +1,47 @@
 package com.fitnesscalc.registration;
 
 
+import com.fitnesscalc.goals.Goal;
+import com.fitnesscalc.goals.GoalRepository;
+import com.fitnesscalc.profile.Profile;
+import com.fitnesscalc.profile.ProfileRepository;
+import com.fitnesscalc.settings.Setting;
+import com.fitnesscalc.settings.SettingRepository;
 import com.fitnesscalc.user.User;
 import com.fitnesscalc.user.UserRepository;
 import com.fitnesscalc.user.UserRole;
+import com.fitnesscalc.weights.Weight;
+import com.fitnesscalc.weights.WeightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Date;
 
 @Service
 public class RegistrationService {
 
     private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
+    private final GoalRepository goalRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final SettingRepository settingRepository;
+    private final WeightRepository weightRepository;
 
     @Autowired
     public RegistrationService (
             UserRepository userRepository,
-            BCryptPasswordEncoder bCryptPasswordEncoder) {
+            BCryptPasswordEncoder bCryptPasswordEncoder,
+            ProfileRepository profileRepository,
+            SettingRepository settingRepository,
+            GoalRepository goalRepository,
+            WeightRepository weightRepository) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.profileRepository = profileRepository;
+        this.settingRepository = settingRepository;
+        this.goalRepository = goalRepository;
+        this.weightRepository = weightRepository;
     }
 
     /**
@@ -49,8 +71,38 @@ public class RegistrationService {
         user.setRole(UserRole.USER);
 
         // Guardamos el usuario
-        // user = registrationRepository.save(user);
         userRepository.save(user);
+
+        // Creamos datos por defecto ...
+
+        // Perfil
+        Profile profile = new Profile(null, user.getId(), 0, 0);
+        profileRepository.save(profile);
+
+        // Goals
+        Goal goal = new Goal(null, user.getId(), 3000, 30, 45, 25);
+        goalRepository.save(goal);
+
+        // Weight
+        Weight weight = new Weight(null, user.getId(), new Date(), 0);
+        weightRepository.save(weight);
+
+        // Configuracion
+        Setting s1 = new Setting(null, user.getId(), "meal1", "desayuno");
+        settingRepository.save(s1);
+
+        Setting s2 = new Setting(null, user.getId(), "meal2", "almuerzo");
+        settingRepository.save(s2);
+
+        Setting s3 = new Setting(null, user.getId(), "meal3", "merienda");
+        settingRepository.save(s3);
+
+        Setting s4 = new Setting(null, user.getId(), "meal4", "cena");
+        settingRepository.save(s4);
+
+        Setting s5 = new Setting(null, user.getId(), "meal5", "aperitivos");
+        settingRepository.save(s5);
+
         return new RegistrationResponse(
                 user.getId(),
                 user.getUsername(),
